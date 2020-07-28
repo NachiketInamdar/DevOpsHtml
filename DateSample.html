@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript function to get time differences in minutes between two dates</title>
+</head>
+<body>
+	<p id="output"></p>
+	<script type="text/JavaScript">
+			function diff_hours(dt2, dt1) 
+			 {
+
+			  var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+			  diff /= (60 * 60);
+			  return Math.abs(Math.round(diff));
+			  
+			 }
+			 function diff_minutes(dt2, dt1) 
+			 {
+
+			  var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+			  diff /= 60;
+			  return Math.abs(Math.round(diff));
+			  
+			 }
+			 function diff_seconds(dt2, dt1) 
+			 {
+
+			  var diff =((dt2.getTime() - dt1.getTime()) / 1000)%60;
+			  return Math.abs(Math.round(diff));
+			  
+			 }
+			<!-- dt1 = new Date("October 13, 2014 08:11:27"); -->
+			<!-- dt2 = new Date("October 17, 2014 11:13:36"); -->
+			<!-- console.log(diff_hours(dt1, dt2)); -->
+			<!-- console.log(diff_minutes(dt1, dt2)); -->
+			<!-- console.log(diff_seconds(dt1, dt2)); -->
+			var currDt = new Date();
+			var timeInfo = [new Date("July 22, 2020 07:01:27"),new Date("July 23, 2020 11:34:00")];
+			var index=0;
+			for(index=0;index<timeInfo.length;index++)
+			{
+			   var diffInHours = diff_hours(currDt,timeInfo[index]);
+			   console.log(diffInHours);
+			   var diffInMinutes = diff_minutes(currDt,timeInfo[index]);
+			   console.log(diffInMinutes);
+			   var diffInSeconds = diff_seconds(currDt,timeInfo[index]);
+			   console.log(diffInSeconds);
+			   if(diffInHours === 0 && diffInMinutes === 0 && diffInSeconds === 0){
+					document.getElementById("output").innerHTML += "now"	
+			   }
+			   else if(diffInSeconds ===1 && diffInMinutes<1) {
+					document.getElementById("output").innerHTML +=	diffInSeconds+" second ago"+"<br/>";
+			   }
+			   else if(diffInSeconds>1 && diffInMinutes<1){
+					document.getElementById("output").innerHTML +=	diffInSeconds+" seconds ago"+"<br/>";
+			   }
+			   else if(diffInMinutes===1 && diffInHours<1){
+					document.getElementById("output").innerHTML +=	diffInMinutes+" minute ago"+"<br/>";
+			   }
+			   else if(diffInMinutes>1 && diffInHours<1){
+					document.getElementById("output").innerHTML +=	diffInMinutes+" minutes ago"+"<br/>";
+			   }
+			   else if(diffInHours===1){
+					document.getElementById("output").innerHTML +=	diffInHours+" hour ago"+"<br/>";
+			   }
+			   else if(diffInHours>1){
+					document.getElementById("output").innerHTML +=	diffInHours+" hours ago"+"<br/>";
+			   }
+			}
+	</script>
+</body>
+</html>
